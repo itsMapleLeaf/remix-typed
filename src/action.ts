@@ -34,6 +34,6 @@ export function createActionHandler(actions: TypedActionMap) {
 
     const data = action.schema.parse(JSON.parse(body.data as string))
     const result = await action.run(data, args)
-    return result || responseTyped(undefined, 204) // 204 means "No Content"
+    return result ?? responseTyped(undefined, 204) // 204 means "No Content"
   }
 }
