@@ -26,6 +26,9 @@
     "extends": [
       "./node_modules/@itsmapleleaf/configs/eslint"
     ],
+    "parserOptions": {
+      "project": "./tsconfig.base.json"
+    },
     "ignorePatterns": [
       "**/node_modules/**",
       "**/build/**",
