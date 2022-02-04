@@ -1,16 +1,17 @@
+import type { MetaFunction } from "remix"
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
-} from "remix";
-import type { MetaFunction } from "remix";
+  ScrollRestoration,
+} from "remix"
 
 export const meta: MetaFunction = () => {
-  return { title: "New Remix App" };
-};
+  return { title: "New Remix App" }
+}
 
 export default function App() {
   return (
@@ -22,11 +23,18 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <header>
+          <nav>
+            <Link to="/data-functions">Data Functions</Link>
+          </nav>
+        </header>
+        <main>
+          <Outlet />
+        </main>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === "development" && <LiveReload />}
       </body>
     </html>
-  );
+  )
 }
