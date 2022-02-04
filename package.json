@@ -70,7 +70,10 @@
     "ignorePatterns": [
       "**/node_modules/**",
       "**/dist/**"
-    ]
+    ],
+    "rules": {
+      "import/no-unused-modules": "off"
+    }
   },
   "prettier": "@itsmapleleaf/configs/prettier"
 }
