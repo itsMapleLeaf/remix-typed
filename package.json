@@ -9,6 +9,10 @@
   "homepage": "https://github.com/itsMapleLeaf/remix-typed#readme",
   "changelog": "https://github.com/itsMapleLeaf/remix-typed/releases",
   "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "import": "./dist/main.js",
