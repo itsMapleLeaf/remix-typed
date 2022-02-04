@@ -1,6 +1,6 @@
 import type { DataFunctionArgs } from "@remix-run/server-runtime"
 import type { ZodType } from "zod"
-import { responseTyped } from "./response"
+import { responseTyped } from "./data"
 import type { JsonValue } from "./types"
 
 export type TypedAction<Data extends JsonValue> = {
