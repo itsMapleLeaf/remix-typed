@@ -1,7 +1,0 @@
-{
-  "extends": "@itsmapleleaf/configs/tsconfig.base",
-  "compilerOptions": {
-    "jsx": "react"
-  },
-  "exclude": ["node_modules", "dist"]
-}
