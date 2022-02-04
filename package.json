@@ -3,7 +3,7 @@
   "name": "remix-typed",
   "author": "itsMapleLeaf",
   "description": "End-to-end type safety with Remix",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "repository": "https://github.com/itsMapleLeaf/remix-typed",
   "homepage": "https://github.com/itsMapleLeaf/remix-typed#readme",
