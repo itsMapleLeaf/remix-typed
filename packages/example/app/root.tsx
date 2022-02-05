@@ -1,6 +1,5 @@
 import type { MetaFunction } from "remix"
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
@@ -8,12 +7,20 @@ import {
   Scripts,
   ScrollRestoration,
 } from "remix"
+import { useLoaderDataTyped } from "remix-typed"
+import { loadColors } from "./colors.server"
+import { TypedForm } from "./typed-client"
+
+export function loader() {
+  return loadColors()
+}
 
 export const meta: MetaFunction = () => {
   return { title: "New Remix App" }
 }
 
 export default function App() {
+  const data = useLoaderDataTyped<typeof loader>()
   return (
     <html lang="en">
       <head>
@@ -23,12 +30,28 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <header>
-          <nav>
-            <Link to="/data-functions">Data Functions</Link>
-          </nav>
-        </header>
         <main>
+          <h1>color manager</h1>
+          {data.colors.length > 0 ? (
+            <ul>
+              {data.colors.map((color) => (
+                <li key={color.id}>
+                  <a href={`/colors/${color.id}`}>{color.hex}</a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              You have no colors yet.{" "}
+              <TypedForm
+                resource="createColor"
+                data={{}}
+                style={{ display: "inline" }}
+              >
+                <button type="submit">Create one?</button>
+              </TypedForm>
+            </p>
+          )}
           <Outlet />
         </main>
         <ScrollRestoration />
