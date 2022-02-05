@@ -1,33 +1,44 @@
 import type { FormProps } from "@remix-run/react"
-import { Form } from "@remix-run/react"
+import { Form, useLocation } from "@remix-run/react"
 import * as React from "react"
-import type { InferTypedActionData, TypedActionMap } from "./action"
-import type { OnlyString } from "./types"
+import type { InferResourceInput, ResourceMap } from "./resource"
+import type { Merge, OnlyString } from "./types"
+
+export type RemixFormProps = React.ComponentPropsWithoutRef<"form"> & FormProps
 
 export type TypedFormProps<
-  ActionMap extends TypedActionMap,
-  ActionName extends OnlyString<keyof ActionMap>,
-> = Omit<React.ComponentPropsWithoutRef<"form"> & FormProps, "action"> & {
-  as?: React.ComponentType<React.ComponentPropsWithoutRef<"form"> & FormProps>
-  action: ActionName
-  data: InferTypedActionData<ActionMap[ActionName]>
-  children: React.ReactNode
-}
+  Resources extends ResourceMap,
+  ResourceName extends keyof Resources,
+> = Merge<
+  RemixFormProps,
+  {
+    resource: OnlyString<ResourceName>
+    data: InferResourceInput<Resources[ResourceName]>
+    children: React.ReactNode
+    as?: React.ComponentType<React.ComponentPropsWithoutRef<"form"> & FormProps>
+  }
+>
 
-export function createTypedForm<ActionMap extends TypedActionMap>(
-  route: string,
+export function createTypedForm<Resources extends ResourceMap>(
+  routePath: string,
 ) {
-  return function TypedForm<ActionName extends OnlyString<keyof ActionMap>>({
+  return function TypedForm<ResourceName extends keyof Resources>({
     as: FormComponent = Form,
-    action,
+    resource,
     data,
     children,
     ...formProps
-  }: TypedFormProps<ActionMap, ActionName>) {
+  }: TypedFormProps<Resources, ResourceName>) {
+    const location = useLocation()
     return (
-      <FormComponent action={route} method="post" {...formProps}>
-        <input type="hidden" name="actionName" value={action} />
+      <FormComponent action={routePath} method="post" replace {...formProps}>
+        <input type="hidden" name="resourceName" value={resource} />
         <input type="hidden" name="data" value={JSON.stringify(data)} />
+        <input
+          type="hidden"
+          name="redirectTo"
+          value={location.pathname + location.search}
+        />
         {children}
       </FormComponent>
     )

@@ -11,3 +11,13 @@ export type JsonValue =
   | undefined
 
 export type OnlyString<Type> = Type extends string ? Type : never
+
+export type ValueOf<Type> = Type[keyof Type]
+
+/**
+ * Merges two types, where the second type's properties override the first.
+ * In other words, an intersection, but with object spread mechanics.
+ *
+ * Intersections like to "unionize" properties of the same name, this keeps that from happening.
+ */
+export type Merge<A, B> = Omit<A, keyof B> & B

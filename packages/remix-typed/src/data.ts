@@ -3,12 +3,12 @@ import type { DataFunctionArgs } from "@remix-run/server-runtime"
 import { json, redirect } from "@remix-run/server-runtime"
 import type { JsonValue, MaybePromise } from "./types"
 
-export type ResponseTyped<Data extends JsonValue> = Omit<Response, "json"> & {
+export type ResponseTyped<Data> = Omit<Response, "json"> & {
   json(): Promise<Data>
 }
 
 // prettier-ignore
-export type LoaderFunctionTyped<Data extends JsonValue> = (args: DataFunctionArgs) =>
+export type LoaderFunctionTyped<Data> = (args: DataFunctionArgs) =>
   MaybePromise<Data | ResponseTyped<Data>>
 
 export type InferLoaderData<LoaderFunction> =
@@ -21,7 +21,7 @@ export function responseTyped(
   return new Response(
     body,
     typeof init === "number" ? { status: init } : init,
-  ) as ResponseTyped<JsonValue>
+  ) as ResponseTyped<unknown>
 }
 
 export function jsonTyped<Data extends JsonValue>(
