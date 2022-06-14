@@ -1,4 +1,10 @@
 {
   "extends": "@itsmapleleaf/configs/tsconfig.base",
-  "exclude": ["**/node_modules/**", "**/dist/**", "**/build/**", "**/.cache/**"]
+  "exclude": [
+    "**/node_modules/**",
+    "**/build/**",
+    "**/dist/**",
+    "**/.cache/**",
+    "**/coverage/**"
+  ]
 }
