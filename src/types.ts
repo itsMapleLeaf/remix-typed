@@ -10,6 +10,12 @@ export type JsonValue =
   // undefined technically can't exist in json, but having it here makes things easier
   | undefined
 
+/**
+ * `typeof` normally includes number and symbols,
+ * this type is a wrapper around it which only includes strings
+ */
+export type StringKeys<Type> = Extract<keyof Type, string>
+
 export type OnlyString<Type> = Type extends string ? Type : never
 
 export type ValueOf<Type> = Type[keyof Type]
