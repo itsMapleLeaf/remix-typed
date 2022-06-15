@@ -6,11 +6,13 @@ remix-typed is a helper library to improve type safety and inference in Remix.
 
 ```sh
 # npm
-npm install remix-typed zod @remix-run/react @remix-run/server-runtime
+npm install remix-typed
 
 # yarn
-yarn add remix-typed zod @remix-run/react @remix-run/server-runtime
+yarn add remix-typed
 
 # pnpm
-pnpm add remix-typed zod @remix-run/react @remix-run/server-runtime
+pnpm add remix-typed
 ```
+
+## [Examples](./examples)
