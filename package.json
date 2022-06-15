@@ -23,7 +23,7 @@
   "scripts": {
     "build": "tsup-node src/main.tsx --clean --target node16 --format esm,cjs --sourcemap --dts",
     "typecheck": "tsc --noEmit",
-    "release": "release-it",
+    "release": "pnpm run build && release-it",
     "lint": "eslint --ext js,ts,tsx .",
     "lint-fix": "pnpm lint -- --fix",
     "format": "prettier --write .",
