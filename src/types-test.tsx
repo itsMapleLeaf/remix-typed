@@ -1,12 +1,11 @@
-import { Fetcher } from "@remix-run/react"
+import type { Fetcher } from "@remix-run/react"
 import * as React from "react"
+import type { DeferredValue, ResponseTyped } from "./main"
 import {
   DeferredTyped,
   deferredTyped,
-  DeferredValue,
   jsonTyped,
   redirectTyped,
-  ResponseTyped,
   useActionDataTyped,
   useFetcherTyped,
   useLoaderDataTyped,
@@ -17,6 +16,7 @@ import {
   const stringResult: ResponseTyped<string> = jsonTyped("the")
   const trueResult: ResponseTyped<true> = jsonTyped(true)
   const falseResult: ResponseTyped<false> = jsonTyped(false)
+  // eslint-disable-next-line unicorn/no-null
   const nullResult: ResponseTyped<null> = jsonTyped(null)
   const arrayResult: ResponseTyped<string[]> = jsonTyped(["the", "cat"])
   const objectResult: ResponseTyped<{ the: string; is: string }> = jsonTyped({
@@ -75,10 +75,13 @@ import {
   }
 
   const loaderData: { result: string | DeferredValue<number> } =
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useLoaderDataTyped<typeof loader>()
   const actionData: { result: string | DeferredValue<number> } | undefined =
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useActionDataTyped<typeof loader>()
   const fetcher: Fetcher<{ result: string | DeferredValue<number> }> =
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useFetcherTyped<typeof loader>()
 
   const deferred = (
