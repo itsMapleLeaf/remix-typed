@@ -91,6 +91,11 @@ export type DeferredTypedProps<Data> = Omit<
   children: (data: UndeferredValue<Data>) => React.ReactNode
 }
 
+/**
+ * `Deferred` and `useDeferred` can't be well-typed via inference,
+ * so I opted for this render prop wrapper instead,
+ * where the data can be inferred from a prop.
+ */
 export function DeferredTyped<Data>({
   children,
   ...props
