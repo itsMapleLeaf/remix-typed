@@ -1,9 +1,6 @@
 import type { Fetcher } from "@remix-run/react"
-import * as React from "react"
-import type { DeferredValue, ResponseTyped } from "./main"
+import type { ResponseTyped } from "./main"
 import {
-  DeferredTyped,
-  deferredTyped,
   jsonTyped,
   redirectTyped,
   useActionDataTyped,
@@ -57,36 +54,18 @@ import {
 }
 
 {
-  const result: ResponseTyped<{
-    value: number
-    deferredValue: DeferredValue<number>
-  }> = deferredTyped({
-    value: 123,
-    deferredValue: Promise.resolve(123),
-  })
-}
-
-{
   const loader = () => {
     if (Math.random() > 0.5) return jsonTyped({ result: "success" })
-    if (Math.random() > 0.5)
-      return deferredTyped({ result: Promise.resolve(42) })
     return redirectTyped("/failure")
   }
 
-  const loaderData: { result: string | DeferredValue<number> } =
+  const loaderData: { result: string } =
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useLoaderDataTyped<typeof loader>()
-  const actionData: { result: string | DeferredValue<number> } | undefined =
+  const actionData: { result: string } | undefined =
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useActionDataTyped<typeof loader>()
-  const fetcher: Fetcher<{ result: string | DeferredValue<number> }> =
+  const fetcher: Fetcher<{ result: string }> =
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFetcherTyped<typeof loader>()
-
-  const deferred = (
-    <DeferredTyped fallback="" data={loaderData.result}>
-      {(data: string | number): string | number => data}
-    </DeferredTyped>
-  )
 }
